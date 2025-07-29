@@ -1,5 +1,4 @@
 ---
-import { ViewTransitions } from "astro:transitions";
 import Header from "@components/Header.astro";
 import { SITE_CONFIG } from "@config";
 import Footer from "@components/Footer.astro";
@@ -51,7 +50,6 @@ const ogImgUrl = "https://chungsiang.co" + socialImage;
       href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
       rel="stylesheet"
     />
-    <ViewTransitions />
   </head>
   <body class="font-sans font-light bg-[#2C2824]">
     <Header siteLogo={siteLogo} navLinks={navLinks} />
