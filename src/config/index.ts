@@ -9,7 +9,7 @@ export const SITE_CONFIG: SiteConfig = {
   title: "JiangSung",
   author: "Built with Astro.",
   image: "/chungsiang-logo.png",
-  description: "JiangSung, Web Developer based in Cambodia",
+  description: "JiangSung, Fullstack Developer based in Cambodia",
   lang: "km,en",
   siteLogo: "/chungsiang-logo.png",
   navLinks: [
@@ -47,13 +47,28 @@ export const SITE_CONFIG: SiteConfig = {
 export const SITE_CONTENT: SiteContent = {
   hero: {
     name: "CHUNGSIANG ROEURN.",
-    specialty: "Web Developer",
+    specialty: "Fullstack Developer",
     summary1:
-      "Hey, I’m Jiang-Sung — a web developer excited to create and innovate!",
+      "Hey, I’m Jiang-Sung — a fullstack developer excited to create and innovate!",
     summary2: "Have a project in mind? Let's make it happen.",
     email: "rn.chungsiang@gmail.com",
   },
   projects: [
+    {
+      name: "1965.Store Ecommerce",
+      summary:
+        "A mid-level e-commerce platform offering easy online purchasing and payment, designed to be simpler than other options!",
+      link: "https://chungsiang.co/",
+      code: "https://github.com/ChungsiangRoeurn/express-api",
+      technologies: [
+        "ReactJS",
+        "Typescript",
+        "Tailwind CSS",
+        "ShadCN",
+        "ExpressAPI",
+        "Prisma",
+      ],
+    },
     {
       name: "Book Borrow Library App",
       summary:
@@ -63,12 +78,18 @@ export const SITE_CONTENT: SiteContent = {
       technologies: ["NextJS", "Tailwind CSS", "ShadCN", "GoogleAPI"],
     },
     {
-      name: "Reatrey POS",
+      name: "JiangSung Portfolio",
       summary:
-        "A collaborative project built with a friend. I focused on API integration and frontend UI development.",
-      link: "https://reatreypos.com",
-      code: "https://github.com/ChungsiangRoeurn/reatrey-pos",
-      technologies: ["NextJS", "NestJS", "ShadCN", "Prisma", "Turborepo"],
+        "A showcase of a person’s information for clients through a portfolio website.",
+      link: "https://chungsiang.co/",
+      code: "https://github.com/ChungsiangRoeurn/",
+      technologies: [
+        "AstroJS",
+        "Typescript",
+        "ShadCN",
+        "Lucide-React",
+        "MangaAPI",
+      ],
     },
   ],
   about: {
@@ -169,6 +190,11 @@ export const techStack = [
     url: "https://react.dev/",
   },
   {
+    name: "Expo",
+    icon: "/tech/expo.svg",
+    url: "https://expo.dev/",
+  },
+  {
     name: "NextJS",
     icon: "/tech/nextjs.svg",
     url: "https://nextjs.org/",
@@ -198,6 +224,11 @@ export const techStack = [
     icon: "/tech/sqlite.svg",
     url: "https://www.sqlite.org/index.html",
   },
+  {
+    name: "PostgreSQL",
+    icon: "/tech/pgsql.svg",
+    url: "https://www.sqlite.org/index.html",
+  },
 ];
 export const aboutMe: AboutMeItems[] = [
   {
@@ -210,8 +241,8 @@ export const aboutMe: AboutMeItems[] = [
 
 export const employmentItems: EmploymentItem[] = [
   {
-    role: "Backend Developer",
-    company: "CamCyber Digital Tech Team",
+    role: "Fullstack Developer",
+    company: "Freelancer",
     duration: "Jun 2024 – Present",
     description:
       "Learning and building real-world backend projects through API development and system design.",
@@ -220,8 +251,17 @@ export const employmentItems: EmploymentItem[] = [
       "Worked with PostgreSQL and data modeling for backend services",
       "Tested APIs and endpoints using Postman for reliability and performance",
       "Collaborated with frontend developers to ensure seamless API integration",
+      "Mini App Telegram, Mobile App, and Web App Design & Development",
     ],
-    technologies: ["Angular", "NestJS", "TypeScript", "PostgreSQL", "Postman"],
+    technologies: [
+      "Reactjs",
+      "React Native",
+      "NestJS",
+      "TypeScript",
+      "PostgreSQL",
+      "Prisma",
+      "Postman",
+    ],
   },
   {
     role: "Junior Frontend Developer",
@@ -237,6 +277,7 @@ export const employmentItems: EmploymentItem[] = [
     ],
     technologies: [
       "NextJS",
+      "Reactjs",
       "TypeScript",
       "TailwindCSS",
       "ShadCN/UI",
@@ -256,6 +297,13 @@ export const employmentItems: EmploymentItem[] = [
       "Fixed minor UI bugs and improved cross-browser compatibility",
       "Participated in team meetings and code reviews to gain feedback and improve coding quality",
     ],
-    technologies: ["ReactJS", "NextJS", "TypeScript", "TailwindCSS", "Git"],
+    technologies: [
+      "ReactJS",
+      "NextJS",
+      "TypeScript",
+      "TailwindCSS",
+      "CMS",
+      "Git",
+    ],
   },
 ];
