@@ -1,7 +1,6 @@
 ---
 import type { ProjectProps } from "../types";
 import Section from "./Section.astro";
-import { Image } from "astro:assets";
 
 interface Props {
   projects: ProjectProps[];
@@ -14,7 +13,7 @@ const { projects } = Astro.props;
   {
     projects.map((project) => (
       <div
-        class="w-full bg-[#2C2824]/80 text-[#EDE6DA] border border-[#F5D0A9]/20 rounded-xl px-6 py-5 mb-6 shadow-sm transition-all duration-500 opacity-0 translate-y-6 hover:translate-y-0 hover:shadow-md"
+        class="w-full bg-[#2C2824]/80 text-[#EDE6DA] border border-[#F5D0A9]/20 rounded-xl px-6 py-5 mb-6 shadow-sm transition-all duration-700 opacity-0 translate-y-16 hover:translate-y-0 hover:shadow-md"
         data-scroll-animation
       >
         <h3 class="text-xl font-semibold text-[#F5D0A9] mb-2">
@@ -81,7 +80,10 @@ const { projects } = Astro.props;
       },
     );
 
-    animatedElements.forEach((element) => {
+    // Add stagger effect to each project card
+    animatedElements.forEach((element, index) => {
+      // Set a delay based on the element's index
+      (element as HTMLElement).style.transitionDelay = `${index * 100}ms`;
       observer.observe(element);
     });
   }
