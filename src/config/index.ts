@@ -221,6 +221,7 @@ export const techStack = [
   {
     name: "Relational DB",
     icon: "/tech/database.svg",
+    url: "",
   },
 ];
 export const aboutMe: AboutMeItems[] = [
