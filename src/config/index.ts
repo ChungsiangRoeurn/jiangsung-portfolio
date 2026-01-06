@@ -180,13 +180,12 @@ export const techStack = [
   },
   {
     name: "TypeScript",
-    description: "A superset of JavaScript",
     icon: "/tech/typescript.svg",
     url: "https://www.typescriptlang.org/",
   },
   {
     name: "ReactJS",
-    icon: "/tech/reactjs.svg",
+    icon: "/tech/react.svg",
     url: "https://react.dev/",
   },
   {
@@ -220,53 +219,46 @@ export const techStack = [
     url: "https://www.prisma.io/",
   },
   {
-    name: "SQLite",
-    icon: "/tech/sqlite.svg",
-    url: "https://www.sqlite.org/index.html",
-  },
-  {
-    name: "PostgreSQL",
-    icon: "/tech/pgsql.svg",
-    url: "https://www.sqlite.org/index.html",
+    name: "Relational DB",
+    icon: "/tech/database.svg",
   },
 ];
 export const aboutMe: AboutMeItems[] = [
   {
     name: "ROEURN CHUNGSIANG,",
     content: [
-      "A Fullstack Developer, which have journey began at the end of 2022 after finishing high school. Back then, I only knew a little about IT and thought it was mainly about designing websites. That changed when I joined RUPP in 2023 to study Computer Science. In the beginning, I had to learn many orientation subjects, which was quite challenging. But by my second year, the focus shifted more toward core IT subjects, and that’s when I truly found my passion. I explored UX/UI design with Adobe XD and Figma, studied web design, and even built a full-stack POS system with mentorship from senior students working at the Ministry of Public Works and Transport (MPWT). Later, I passed an internship as a Frontend Developer at the end of my second year at a startup company base in Phnom Penh, Cambodia. Where I gained real-world experience. Today, I’m working as a Backend Developer, building RESTful APIs and continuing to grow my skills in backend development.",
+      "A Fullstack Developer, which have journey began at the end of 2022 after finishing high school. Back then, I only knew a little about IT and thought it was mainly about designing websites. That changed when I joined RUPP in 2023 to study Computer Science. In the beginning, I had to learn many orientation subjects, which was quite challenging. But by my second year, the focus shifted more toward core IT subjects, and that’s when I truly found my passion. I explored UX/UI design with Adobe XD and Figma, studied web design, and even built a full-stack POS system with mentorship from senior students working at the Ministry of Public Works and Transport (MPWT). Later, I passed an internship as a Frontend Developer at the end of my second year at a startup company base in Phnom Penh, Cambodia. Where I gained real-world experience. Today, I’m working as a Mobile Developer with react native, building and maintaince fullstack app to make it good at both quality and user interface.",
     ],
   },
 ];
 
 export const employmentItems: EmploymentItem[] = [
   {
-    role: "Fullstack Developer",
-    company: "Freelancer",
-    duration: "Jun 2024 – Present",
+    role: "Junior Mobile Developer",
+    company: "NTX Mall Cambodia",
+    duration: "Dec 2025 – Present",
     description:
-      "Learning and building real-world backend projects through API development and system design.",
+      "Learning, building maintain real-world fullstack mobile app development and system design.",
     responsibilities: [
-      "Designed and implemented RESTful APIs using NestJS",
-      "Worked with PostgreSQL and data modeling for backend services",
-      "Tested APIs and endpoints using Postman for reliability and performance",
-      "Collaborated with frontend developers to ensure seamless API integration",
+      "Maintain the fullstack mobile application using react Native",
+      "Worked with MySQL and data modeling for backend services",
+      "Improve better UI base requirement and testing application",
+      "Collaborated with frontend, backend developers to ensure seamless API integration",
       "Mini App Telegram, Mobile App, and Web App Design & Development",
     ],
     technologies: [
       "Reactjs",
       "React Native",
-      "NestJS",
       "TypeScript",
-      "PostgreSQL",
-      "Prisma",
+      "GraphQL",
+      "MySQL",
       "Postman",
     ],
   },
   {
     role: "Junior Frontend Developer",
     company: "dreamsLAB",
-    duration: "Dec 2024 – Jun 2025",
+    duration: "Dec 2024 – Jul 2025",
     description:
       "Developed and maintained full-stack web applications for clients across multiple industries.",
     responsibilities: [
@@ -282,7 +274,6 @@ export const employmentItems: EmploymentItem[] = [
       "TailwindCSS",
       "ShadCN/UI",
       "HonoJS",
-      "Figma",
     ],
   },
   {
