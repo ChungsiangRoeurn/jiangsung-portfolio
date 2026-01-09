@@ -1,44 +1,85 @@
 ---
 import type { SiteConfig } from "@types";
+import {
+  Github,
+  Twitter,
+  Linkedin,
+  Mail,
+  Globe,
+  Facebook,
+  Send,
+  Instagram,
+} from "lucide-react";
 
 type Props = Pick<SiteConfig, "author" | "socialLinks">;
 
 const { author, socialLinks } = Astro.props;
 const currentYear = new Date().getFullYear();
+
+const IconMap = {
+  github: Github,
+  linkedin: Linkedin,
+  facebook: Facebook,
+  send: Send,
+};
 ---
 
-<footer
-  class="w-full bg-[#2C2824] text-[#EDE6DA] border-t border-neutral/20 shadow-inner px-6 py-6"
->
-  <div class="max-w-5xl mx-auto flex flex-col items-center gap-4">
-    <ul class="flex flex-wrap justify-center gap-3">
-      {
-        socialLinks.map((link) => (
-          <li>
-            <a
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="flex items-center gap-1 rounded-md px-3 py-1.5 transition-all duration-300 bg-[#F5D0A9] text-black hover:bg-[#f2be86]"
-            >
-              {link.icon && (
-                <img
-                  src={link.icon}
-                  alt={`${link.text} icon`}
-                  width="25"
-                  height="25"
-                  class="inline-block"
-                />
-              )}
-              <span class="text-sm font-medium">{link.text}</span>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+<footer class="relative text-white w-full py-12 px-6 overflow-hidden">
+  <div
+    class="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-1/2 bg-[#F5D0A9]/5 rounded-full blur-[120px] -z-10"
+  >
+  </div>
 
-    <p class="text-xs text-neutral-400 select-none tracking-wide text-center">
-      {author} © {currentYear}. All rights reserved.
-    </p>
+  <div class="max-w-7xl mx-auto flex flex-col items-center">
+    <div
+      class="w-full h-px bg-gradient-to-r from-transparent via-[#F5D0A9]/30 to-transparent mb-12"
+    >
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 w-full gap-10 items-center">
+      <div class="flex flex-col items-center md:items-start order-2 md:order-1">
+        <p class="text-sm text-neutral-500 mt-2">Built with Astro.</p>
+      </div>
+
+      <div class="flex justify-center order-1 md:order-2">
+        <ul
+          class="flex items-center gap-3 p-2 rounded-2xl bg-gray-900/40 border border-[#F5D0A9]/20 backdrop-blur-md"
+        >
+          {
+            socialLinks.map((link) => {
+              const iconKey = link.text.toLowerCase() as keyof typeof IconMap;
+              const IconComponent = IconMap[iconKey] || IconMap.send;
+
+              return (
+                <li>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link.text}
+                    class="group flex items-center justify-center w-11 h-11 rounded-xl transition-all duration-300 
+                    text-[#F5D0A9] 
+                    hover:bg-[#F5D0A9] 
+                    hover:text-[#5D4037] 
+                    hover:scale-110 hover:shadow-lg hover:shadow-[#F5D0A9]/20"
+                  >
+                    <IconComponent size={20} strokeWidth={2} />
+                  </a>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </div>
+
+      <div class="flex flex-col items-center md:items-end order-3">
+        <p
+          class="text-xs text-neutral-500 select-none tracking-wide text-center md:text-right"
+        >
+          {author}
+        </p>
+        © {currentYear}, All rights reserved.
+      </div>
+    </div>
   </div>
 </footer>
