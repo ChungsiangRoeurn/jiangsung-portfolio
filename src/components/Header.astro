@@ -7,22 +7,85 @@ const { navLinks } = Astro.props;
 ---
 
 <header
-  class="mx-full flex items-center justify-between p-5 relative border-b border-neutral/20 text-[#EDE6DA]"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out border-b border-transparent"
+  id="main-header"
 >
-  <nav
-    class="w-full text-[#EDE6DA] bg-transparent sm:bg-transparent"
-    id="main-menu"
+  <div
+    class="absolute inset-0 bg-gray-900/0 backdrop-blur-0 transition-all duration-300 -z-10"
+    id="header-bg"
   >
-    <ul class="flex justify-center items-center gap-2">
+  </div>
+
+  <div class="max-w-7xl mx-auto px-6">
+    <nav class="flex items-center justify-between h-20">
+      <div class="flex-1">
+        <!-- <a
+          href="/"
+          class="text-xl font-bold tracking-tighter text-[#EDE6DA] group"
+        >
+          PORT<span class="text-[#F5D0A9] group-hover:animate-pulse">FOLIO</span
+          >
+        </a> -->
+      </div>
+
+      <ul
+        class="hidden md:flex items-center bg-gray-800/40 border border-white/5 backdrop-blur-lg rounded-full px-2 py-1 gap-1"
+      >
+        {
+          navLinks.map((link) => (
+            <li>
+              <a
+                class="relative font-medium text-sm px-5 py-2 block rounded-full 
+                text-[#EDE6DA]/70 transition-all duration-300
+                hover:text-[#F5D0A9]"
+                href={link.href}
+                data-nav-link
+              >
+                <span class="relative z-10">{link.text}</span>
+                <span class="nav-active-pill absolute inset-0 bg-white/5 rounded-full opacity-0 transition-opacity duration-300" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="flex-1 flex justify-end">
+        <!-- <a
+          href="#contact"
+          class="hidden md:block px-5 py-2 text-sm font-bold text-[#2C2824] bg-[#F5D0A9] rounded-full hover:scale-105 transition-transform"
+        >
+          Let's Talk
+        </a> -->
+
+        <button
+          class="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5
+          rounded-xl bg-gray-800/50 border border-white/10"
+          id="mobile-menu-button"
+          aria-label="Toggle menu"
+        >
+          <span
+            class="w-5 h-0.5 bg-[#F5D0A9] transition-all duration-300"
+            id="line1"></span>
+          <span
+            class="w-5 h-0.5 bg-[#F5D0A9] transition-all duration-300"
+            id="line2"></span>
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <div
+    class="fixed inset-0 bg-gray-900/95 backdrop-blur-xl md:hidden transition-all duration-500 translate-x-full z-40"
+    id="mobile-menu"
+  >
+    <ul class="flex flex-col items-center justify-center h-full gap-8">
       {
         navLinks.map((link) => (
-          <li class="relative">
+          <li>
             <a
-              class="font-sm md:font-medium text-base px-4 py-2 block rounded-md 
-              transition-colors duration-300
-            hover:text-[#2C2824] hover:bg-[#F5D0A9]"
+              class="text-3xl font-bold text-[#EDE6DA] hover:text-[#F5D0A9] transition-colors"
               href={link.href}
-              data-nav-link
+              data-mobile-link
             >
               {link.text}
             </a>
@@ -30,50 +93,123 @@ const { navLinks } = Astro.props;
         ))
       }
     </ul>
-  </nav>
+  </div>
+
+  <div class="absolute bottom-0 left-0 w-full h-[1px] bg-white/5">
+    <div
+      class="h-full bg-[#F5D0A9] shadow-[0_0_10px_#F5D0A9] transition-all duration-150"
+      id="scroll-progress"
+      style="width: 0%"
+    >
+    </div>
+  </div>
 </header>
 
-<script>
-  function smoothScroll(target: string) {
-    if (!target) return;
-    const element = document.querySelector(target);
-    if (!element) return;
-
-    const startPosition = window.scrollY;
-    const targetPosition = element.getBoundingClientRect().top + window.scrollY;
-    const footerOffset = 200;
-    const distance = targetPosition - startPosition + footerOffset;
-    const duration = 1000;
-    let start: number | null = null;
-
-    function animation(currentTime: number) {
-      if (start === null) start = currentTime;
-      const timeElapsed = currentTime - start;
-      const run = ease(timeElapsed, startPosition, distance, duration);
-      window.scrollTo(0, run);
-      if (timeElapsed < duration) requestAnimationFrame(animation);
-    }
-
-    function ease(t: number, b: number, c: number, d: number) {
-      t /= d / 2;
-      if (t < 1) return (c / 2) * t * t + b;
-      t--;
-      return (-c / 2) * (t * (t - 2) - 1) + b;
-    }
-
-    requestAnimationFrame(animation);
+<style>
+  /* Header hidden state for "Hide on scroll" */
+  #main-header.nav-hidden {
+    transform: translateY(-100%);
   }
 
-  const links = document.querySelectorAll('a[href^="#"]');
-  links.forEach((link) => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      const target = (e.currentTarget as HTMLAnchorElement).getAttribute(
-        "href",
-      );
-      if (target) {
-        smoothScroll(target);
+  /* Active link state */
+  [data-nav-link].active {
+    color: #f5d0a9;
+  }
+
+  [data-nav-link].active .nav-active-pill {
+    opacity: 1;
+  }
+
+  /* Mobile menu logic */
+  #mobile-menu.open {
+    transform: translateX(0);
+  }
+
+  #mobile-menu-button.open #line1 {
+    transform: translateY(2px) rotate(45deg);
+  }
+
+  #mobile-menu-button.open #line2 {
+    transform: translateY(-2px) rotate(-45deg);
+  }
+</style>
+
+<script>
+  const header = document.getElementById("main-header");
+  const headerBg = document.getElementById("header-bg");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const scrollProgress = document.getElementById("scroll-progress");
+
+  let lastScroll = 0;
+
+  // 1. Hide/Show Header on Scroll + Background Change
+  window.addEventListener("scroll", () => {
+    const currentScroll = window.scrollY;
+
+    // Background and Border logic
+    if (currentScroll > 50) {
+      headerBg?.classList.replace("bg-gray-900/0", "bg-gray-900/80");
+      headerBg?.classList.replace("backdrop-blur-0", "backdrop-blur-md");
+      header?.classList.replace("border-transparent", "border-white/5");
+    } else {
+      headerBg?.classList.replace("bg-gray-900/80", "bg-gray-900/0");
+      headerBg?.classList.replace("backdrop-blur-md", "backdrop-blur-0");
+      header?.classList.replace("border-white/5", "border-transparent");
+    }
+
+    // Hide on scroll down, show on scroll up
+    if (currentScroll > lastScroll && currentScroll > 200) {
+      header?.classList.add("nav-hidden");
+    } else {
+      header?.classList.remove("nav-hidden");
+    }
+
+    // Progress Bar
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const scrollPercent =
+      (currentScroll / (documentHeight - windowHeight)) * 100;
+    if (scrollProgress) scrollProgress.style.width = `${scrollPercent}%`;
+
+    lastScroll = currentScroll;
+    updateActiveLink();
+  });
+
+  // 2. Active Link Highlighting
+  function updateActiveLink() {
+    const sections = document.querySelectorAll("section[id]");
+    const navLinks = document.querySelectorAll("[data-nav-link]");
+    let current = "";
+
+    sections.forEach((section) => {
+      const sectionTop = (section as HTMLElement).offsetTop;
+      if (window.scrollY >= sectionTop - 100) {
+        current = section.getAttribute("id") || "";
       }
+    });
+
+    navLinks.forEach((link) => {
+      link.classList.remove("active");
+      if (link.getAttribute("href") === `#${current}`) {
+        link.classList.add("active");
+      }
+    });
+  }
+
+  // 3. Mobile Menu Toggle
+  mobileMenuButton?.addEventListener("click", () => {
+    mobileMenu?.classList.toggle("open");
+    mobileMenuButton?.classList.toggle("open");
+    document.body.classList.toggle("overflow-hidden"); // Prevent scrolling when menu open
+  });
+
+  // Close mobile menu on link click
+  document.querySelectorAll("[data-mobile-link]").forEach((link) => {
+    link.addEventListener("click", () => {
+      mobileMenu?.classList.remove("open");
+      mobileMenuButton?.classList.remove("open");
+      document.body.classList.remove("overflow-hidden");
     });
   });
 </script>

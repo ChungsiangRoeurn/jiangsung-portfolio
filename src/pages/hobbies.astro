@@ -15,187 +15,399 @@ const techVideos = await fetchTechVideosData();
 ---
 
 <Layout>
-  <Section href="" text="Hobbies">
-    <div class="space-y-8">
-      <!-- Manga & Comics Section with API Data -->
+  <Section href="" text="Hobbies" class="pt-20">
+    <div class="space-y-8 max-w-7xl mx-auto">
+      <!-- Manga & Comics Section -->
       <div
-        class="hobby-item group relative p-6 rounded-lg transition-all duration-300 border-t-4 border-[#F5D0A9]/30 hover:border-[#F5D0A9]/50"
+        class="hobby-item group relative overflow-hidden rounded-2xl transition-all duration-500 hover:scale-[1.02]"
+        data-hobby-card
       >
-        <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-          <span class="text-3xl">📚</span> Manga & Comics
-        </h3>
-        <p class="text-lg text-white/80 mb-4">
-          Avid reader of One Piece, Attack on Titan, and other shonen/seinen
-          manga. Enjoy analyzing storytelling techniques and character
-          development.
-        </p>
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-gray-900/90 to-gray-900/90 backdrop-blur-sm"
+        >
+        </div>
+        <div
+          class="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"
+        >
+        </div>
 
-        {
-          mangaList.length > 0 && (
-            <div class="mt-4">
-              <h4 class="text-xl font-semibold text-white mb-3">
-                Currently Reading:
-              </h4>
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {mangaList.map(
-                  (manga: {
-                    cover_i: any;
-                    title: unknown;
-                    author_name: any[];
-                    first_publish_year: any;
-                  }) => (
-                    <div class="bg-gray-800/50 p-4 rounded-lg">
-                      {manga.cover_i ? (
-                        <img
-                          src={`https://covers.openlibrary.org/b/id/${manga.cover_i}-M.jpg`}
-                          alt={String(manga.title)}
-                          class="w-full h-48 object-cover rounded mb-2"
-                        />
-                      ) : (
-                        <div class="w-full h-48 bg-gray-700 rounded mb-2 flex items-center justify-center">
-                          <span class="text-gray-400">No cover available</span>
+        <div
+          class="relative p-8 border border-purple-500/20 hover:border-purple-500/40 transition-colors duration-300"
+        >
+          <div class="flex items-center gap-3 mb-6">
+            <span class="text-5xl filter drop-shadow-lg">📚</span>
+            <h3 class="text-3xl font-bold text-white">Manga & Comics</h3>
+          </div>
+
+          <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+            Avid reader of One Piece, Attack on Titan, and other shonen/seinen
+            manga. Enjoy analyzing storytelling techniques and character
+            development.
+          </p>
+
+          {
+            mangaList.length > 0 && (
+              <div class="mt-6">
+                <h4 class="text-xl font-semibold text-purple-300 mb-4 flex items-center gap-2">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+                  </svg>
+                  Currently Reading
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {mangaList.map(
+                    (manga: {
+                      cover_i: any;
+                      title: unknown;
+                      author_name: any[];
+                      first_publish_year: any;
+                    }) => (
+                      <div class="group/card relative bg-gray-800/50 rounded-xl overflow-hidden hover:bg-gray-800/70 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/20 border border-gray-700/50 hover:border-purple-500/50">
+                        <div class="relative overflow-hidden">
+                          {manga.cover_i ? (
+                            <img
+                              src={`https://covers.openlibrary.org/b/id/${manga.cover_i}-M.jpg`}
+                              alt={String(manga.title)}
+                              class="w-full h-64 object-cover transition-transform duration-500 group-hover/card:scale-110"
+                            />
+                          ) : (
+                            <div class="w-full h-64 bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center">
+                              <span class="text-gray-400 text-sm">
+                                No cover available
+                              </span>
+                            </div>
+                          )}
+                          <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-60" />
                         </div>
-                      )}
-                      <h5 class="text-lg font-medium text-white truncate">
-                        {manga.title}
-                      </h5>
-                      <p class="text-gray-400">
-                        {manga.author_name?.[0] || "Unknown author"} •{" "}
-                        {manga.first_publish_year || "Unknown year"}
-                      </p>
-                    </div>
-                  ),
-                )}
+                        <div class="p-4">
+                          <h5 class="text-lg font-semibold text-white mb-1 truncate group-hover/card:text-purple-300 transition-colors">
+                            {manga.title}
+                          </h5>
+                          <p class="text-sm text-gray-400">
+                            {manga.author_name?.[0] || "Unknown author"}
+                          </p>
+                          <p class="text-xs text-purple-400 mt-1">
+                            {manga.first_publish_year || "Unknown year"}
+                          </p>
+                        </div>
+                      </div>
+                    ),
+                  )}
+                </div>
               </div>
-            </div>
-          )
-        }
+            )
+          }
+        </div>
       </div>
 
       <!-- Tech & Anime Section -->
       <div
-        class="hobby-item group relative p-6 rounded-lg transition-all duration-300 border-t-4 border-[#F5D0A9]/30 hover:border-[#F5D0A9]/50"
+        class="hobby-item group relative overflow-hidden rounded-2xl transition-all duration-500 hover:scale-[1.02]"
+        data-hobby-card
       >
-        <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-          <span class="text-3xl">🎬</span> Tech & Anime
-        </h3>
-        <p class="text-lg text-white/80">
-          Regularly watch tech reviews, coding tutorials, and anime series.
-          Particularly interested in cyberpunk and sci-fi genres.
-        </p>
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-cyan-900/20 via-gray-900/90 to-gray-900/90 backdrop-blur-sm"
+        >
+        </div>
+        <div
+          class="absolute top-0 left-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl"
+        >
+        </div>
 
-        {
-          animeList.length > 0 && (
-            <div class="mt-4">
-              <h4 class="text-xl font-semibold text-white mb-3">
-                Recent Anime Favorites:
-              </h4>
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {animeList.map(
-                  (anime: {
-                    images: { jpg: { image_url: any } };
-                    title: unknown;
-                    score: any;
-                    year: any;
-                  }) => (
-                    <div class="bg-gray-800/50 p-4 rounded-lg">
-                      <img
-                        src={
-                          anime.images?.jpg?.image_url ||
-                          "https://via.placeholder.com/300x425"
-                        }
-                        alt={String(anime.title)}
-                        class="w-full h-48 object-cover rounded mb-2"
-                      />
-                      <h5 class="text-lg font-medium text-white truncate">
-                        {anime.title}
-                      </h5>
-                      <p class="text-gray-400">
-                        Score: {anime.score || "N/A"} •{" "}
-                        {anime.year || "Unknown year"}
-                      </p>
-                    </div>
-                  ),
-                )}
-              </div>
-            </div>
-          )
-        }
+        <div
+          class="relative p-8 border border-cyan-500/20 hover:border-cyan-500/40 transition-colors duration-300"
+        >
+          <div class="flex items-center gap-3 mb-6">
+            <span class="text-5xl filter drop-shadow-lg">🎬</span>
+            <h3 class="text-3xl font-bold text-white">Tech & Anime</h3>
+          </div>
 
-        {
-          techVideos.length > 0 && (
-            <div class="mt-4">
-              <h4 class="text-xl font-semibold text-white mb-3">
-                Recent Tech Videos:
-              </h4>
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {techVideos.map(
-                  (video: {
-                    snippet: {
-                      thumbnails: { medium: { url: any } };
+          <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+            Regularly watch tech reviews, coding tutorials, and anime series.
+            Particularly interested in cyberpunk and sci-fi genres.
+          </p>
+
+          {
+            animeList.length > 0 && (
+              <div class="mb-8">
+                <h4 class="text-xl font-semibold text-cyan-300 mb-4 flex items-center gap-2">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z" />
+                  </svg>
+                  Recent Anime Favorites
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {animeList.map(
+                    (anime: {
+                      images: { jpg: { image_url: any } };
                       title: unknown;
-                      publishedAt: string | number | Date;
-                    };
-                  }) => (
-                    <div class="bg-gray-800/50 p-4 rounded-lg">
-                      <img
-                        src={
-                          video.snippet?.thumbnails?.medium?.url ||
-                          "https://via.placeholder.com/300x169"
-                        }
-                        alt={String(video.snippet?.title)}
-                        class="w-full h-32 object-cover rounded mb-2"
-                      />
-                      <h5 class="text-lg font-medium text-white truncate">
-                        {video.snippet?.title}
-                      </h5>
-                      <p class="text-gray-400 text-sm">
-                        {new Date(
-                          video.snippet?.publishedAt,
-                        ).toLocaleDateString()}
-                      </p>
-                    </div>
-                  ),
-                )}
+                      score: any;
+                      year: any;
+                    }) => (
+                      <div class="group/card relative bg-gray-800/50 rounded-xl overflow-hidden hover:bg-gray-800/70 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-cyan-500/20 border border-gray-700/50 hover:border-cyan-500/50">
+                        <div class="relative overflow-hidden">
+                          <img
+                            src={
+                              anime.images?.jpg?.image_url ||
+                              "https://via.placeholder.com/300x425"
+                            }
+                            alt={String(anime.title)}
+                            class="w-full h-64 object-cover transition-transform duration-500 group-hover/card:scale-110"
+                          />
+                          <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-60" />
+                          {anime.score && (
+                            <div class="absolute top-3 right-3 bg-cyan-500/90 backdrop-blur-sm px-3 py-1 rounded-full">
+                              <span class="text-white font-bold text-sm">
+                                ★ {anime.score}
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                        <div class="p-4">
+                          <h5 class="text-lg font-semibold text-white mb-1 truncate group-hover/card:text-cyan-300 transition-colors">
+                            {anime.title}
+                          </h5>
+                          <p class="text-sm text-gray-400">
+                            {anime.year || "Unknown year"}
+                          </p>
+                        </div>
+                      </div>
+                    ),
+                  )}
+                </div>
               </div>
-            </div>
-          )
-        }
+            )
+          }
+
+          {
+            techVideos.length > 0 && (
+              <div class="mt-8">
+                <h4 class="text-xl font-semibold text-cyan-300 mb-4 flex items-center gap-2">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      fill-rule="evenodd"
+                      d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  Recent Tech Videos
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {techVideos.map(
+                    (video: {
+                      snippet: {
+                        thumbnails: { medium: { url: any } };
+                        title: unknown;
+                        publishedAt: string | number | Date;
+                      };
+                    }) => (
+                      <div class="group/card relative bg-gray-800/50 rounded-xl overflow-hidden hover:bg-gray-800/70 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-cyan-500/20 border border-gray-700/50 hover:border-cyan-500/50">
+                        <div class="relative overflow-hidden">
+                          <img
+                            src={
+                              video.snippet?.thumbnails?.medium?.url ||
+                              "https://via.placeholder.com/300x169"
+                            }
+                            alt={String(video.snippet?.title)}
+                            class="w-full h-40 object-cover transition-transform duration-500 group-hover/card:scale-110"
+                          />
+                          <div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent" />
+                          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">
+                            <div class="w-12 h-12 bg-cyan-500/90 rounded-full flex items-center justify-center">
+                              <svg
+                                class="w-6 h-6 text-white ml-1"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                              >
+                                <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="p-4">
+                          <h5 class="text-base font-semibold text-white mb-1 line-clamp-2 group-hover/card:text-cyan-300 transition-colors">
+                            {video.snippet?.title}
+                          </h5>
+                          <p class="text-xs text-gray-400 mt-2">
+                            {new Date(
+                              video.snippet?.publishedAt,
+                            ).toLocaleDateString()}
+                          </p>
+                        </div>
+                      </div>
+                    ),
+                  )}
+                </div>
+              </div>
+            )
+          }
+        </div>
       </div>
 
       <!-- Strategy Games Section -->
       <div
-        class="hobby-item group relative p-6 rounded-lg transition-all duration-300 border-t-4 border-[#F5D0A9]/30 hover:border-[#F5D0A9]/50"
+        class="hobby-item group relative overflow-hidden rounded-2xl transition-all duration-500 hover:scale-[1.02]"
+        data-hobby-card
       >
-        <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-          <span class="text-3xl">♟️</span> Strategy Games
-        </h3>
-        <p class="text-lg text-white/80 mb-3">
-          Enjoy playing chess (1200 ELO) and logic puzzle games to sharpen
-          problem-solving skills and strategic thinking.
-        </p>
-        <div class="flex items-center gap-4 mt-4">
-          <div class="flex-1 bg-gray-800/50 p-3 rounded-lg">
-            <h4 class="font-medium text-white">Chess.com Rating</h4>
-            <div class="flex items-center mt-2">
-              <div class="w-full bg-gray-700 rounded-full h-4">
-                <div
-                  class="bg-amber-500 h-4 rounded-full"
-                  style={`width: ${chessData.progress}%`}
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-amber-900/20 via-gray-900/90 to-gray-900/90 backdrop-blur-sm"
+        >
+        </div>
+        <div
+          class="absolute bottom-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl"
+        >
+        </div>
+
+        <div
+          class="relative p-8 border border-amber-500/20 hover:border-amber-500/40 transition-colors duration-300"
+        >
+          <div class="flex items-center gap-3 mb-6">
+            <span class="text-5xl filter drop-shadow-lg">♟️</span>
+            <h3 class="text-3xl font-bold text-white">Strategy Games</h3>
+          </div>
+
+          <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+            Enjoy playing chess (1200 ELO) and logic puzzle games to sharpen
+            problem-solving skills and strategic thinking.
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+            <!-- Chess Rating Card -->
+            <div
+              class="bg-gradient-to-br from-gray-800/80 to-gray-900/80 p-6 rounded-xl border border-amber-500/30 hover:border-amber-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/20"
+            >
+              <div class="flex items-center justify-between mb-4">
+                <h4 class="font-semibold text-white text-lg">
+                  Chess.com Rating
+                </h4>
+                <svg
+                  class="w-8 h-8 text-amber-400"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
                 >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z"
+                    clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="text-3xl font-bold text-amber-400"
+                    >{chessData.rating}</span
+                  >
+                  <span class="text-sm text-gray-400">ELO</span>
+                </div>
+                <div class="relative">
+                  <div
+                    class="w-full bg-gray-700 rounded-full h-3 overflow-hidden"
+                  >
+                    <div
+                      class="bg-gradient-to-r from-amber-600 to-amber-400 h-3 rounded-full transition-all duration-1000 ease-out relative overflow-hidden"
+                      style={`width: ${chessData.progress}%`}
+                      data-progress-bar
+                    >
+                      <div class="absolute inset-0 bg-white/20 animate-pulse">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex justify-between mt-1">
+                    <span class="text-xs text-gray-500">Beginner</span>
+                    <span class="text-xs text-gray-500">Expert</span>
+                  </div>
                 </div>
               </div>
-              <span class="ml-2 text-white text-sm">{chessData.rating}</span>
             </div>
-          </div>
-          <div class="flex-1 bg-gray-800/50 p-3 rounded-lg">
-            <h4 class="font-medium text-white">Favorite Openings</h4>
-            <p class="text-white/80 text-sm mt-1">
-              {chessData.openings.join(" • ")}
-            </p>
+
+            <!-- Favorite Openings Card -->
+            <div
+              class="bg-gradient-to-br from-gray-800/80 to-gray-900/80 p-6 rounded-xl border border-amber-500/30 hover:border-amber-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/20"
+            >
+              <div class="flex items-center justify-between mb-4">
+                <h4 class="font-semibold text-white text-lg">
+                  Favorite Openings
+                </h4>
+                <svg
+                  class="w-8 h-8 text-amber-400"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="space-y-2">
+                {
+                  chessData.openings.map((opening: string) => (
+                    <div class="flex items-center gap-2 group/opening">
+                      <span class="text-amber-400 text-lg group-hover/opening:scale-125 transition-transform">
+                        ▸
+                      </span>
+                      <span class="text-white group-hover/opening:text-amber-300 transition-colors">
+                        {opening}
+                      </span>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </Section>
+
+  <style>
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    [data-hobby-card] {
+      animation: fadeInUp 0.6s ease-out forwards;
+      opacity: 0;
+    }
+
+    [data-hobby-card]:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    [data-hobby-card]:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    [data-hobby-card]:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  </style>
+
+  <script>
+    // Animate progress bar on load
+    document.addEventListener("DOMContentLoaded", () => {
+      const progressBar = document.querySelector(
+        "[data-progress-bar]",
+      ) as HTMLElement;
+      if (progressBar) {
+        const width = progressBar.style.width;
+        progressBar.style.width = "0%";
+        setTimeout(() => {
+          progressBar.style.width = width;
+        }, 500);
+      }
+    });
+  </script>
 </Layout>
