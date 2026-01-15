@@ -25,3 +25,5 @@ log.txt
 
 # Astro cache (if used)
 .astro/
+.vercel
+.env*.local
